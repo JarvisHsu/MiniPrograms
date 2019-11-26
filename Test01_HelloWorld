@@ -1,0 +1,10 @@
+//this is a test
+//for training my skills
+
+#include <stdio.h>
+
+int main(void)
+{
+  printf("hello world");
+  return 0;
+}
