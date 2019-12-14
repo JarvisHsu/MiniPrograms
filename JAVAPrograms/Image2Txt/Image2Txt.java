@@ -1,4 +1,4 @@
-package MiniPrograms;
+//package MiniPrograms;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -8,15 +8,16 @@ import java.io.IOException;
 
 public class Image2Txt {
     protected static void create(File srcImgFile, File destAsciiImgFile){
-        //字符由复杂到简单
+        //字符由复杂到简单 @#&$%*o!;.
         final String base = "@#&$%*o!;.";
+        //#,.0123456789:;@ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$
         String result = "";
         try{
             //读取源图文件，将图片加载到内存中
             BufferedImage bufferedImage = ImageIO.read(srcImgFile);
-            for (int i = 0; i < bufferedImage.getHeight(); i += (bufferedImage.getHeight()/(bufferedImage.getHeight()/10))) {
+            for (int i = 0; i < bufferedImage.getHeight(); i += (bufferedImage.getHeight()/(bufferedImage.getHeight()/9))) {
                 //宽度
-                for (int j = 0; j < bufferedImage.getWidth(); j += (bufferedImage.getHeight()/(bufferedImage.getHeight()/10))) {
+                for (int j = 0; j < bufferedImage.getWidth(); j += (bufferedImage.getHeight()/(bufferedImage.getHeight()/6))) {
                     int pixel = bufferedImage.getRGB(j, i);
                     // 将一个数字转换为RGB数字
                     int red = (pixel & 0xff0000) >> 16;
@@ -49,5 +50,7 @@ public class Image2Txt {
     public static void main(String[] args) {
         //create("C:\\Users\\Lenovo\\Desktop\\Test\\1.jpg","C:\\Users\\Lenovo\\Desktop\\Test\\1.txt");
         //create("C:\\Users\\Lenovo\\Desktop\\Test\\2.jpg","C:\\Users\\Lenovo\\Desktop\\Test\\2.txt");
+        //create("C:\\Users\\Lenovo\\Desktop\\Test\\3.jpg","C:\\Users\\Lenovo\\Desktop\\Test\\3.txt");
+        create("C:\\Users\\Lenovo\\Desktop\\Test\\4.jpg","C:\\Users\\Lenovo\\Desktop\\Test\\4.txt");
     }
 }

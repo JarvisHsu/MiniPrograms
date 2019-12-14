@@ -66,7 +66,7 @@ public class Game extends JFrame {
             }
         };
         // 启动  立即启动任务，每隔1秒回执行一次run方法
-        timer.schedule(timerTask,0,250);
+        timer.schedule(timerTask,0,500);
     }
     //重写父类paint方法
     @Override
