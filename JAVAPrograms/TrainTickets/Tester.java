@@ -1,4 +1,4 @@
-package MiniPrograms.TrainTickets;
+//package MiniPrograms.TrainTickets;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,9 @@ class Lock{
     public static final Object lock1 = new Object();
     public static final Object lock2 = new Object();
 }
+/**
+ *@author JarvisHsu 徐佳伟
+ */
 public class Tester {
     public static ArrayList<Client> clients = new ArrayList<>();
     public static ArrayList<TrainTicket> trainTickets = new ArrayList<>();
@@ -31,9 +34,11 @@ public class Tester {
         client1.buyTraTicket(trainTicket1);
 
     }
+	//测试三个用户买两种票的线程运行机制。
     public static void Test_2() throws InterruptedException {
         new Tester();
         Thread t1 = new Thread(() -> {
+			//加锁
             synchronized (Lock.lock1) {
                 clients.get(0).buyTraTicket(trainTickets.get(0));
             }
@@ -48,17 +53,18 @@ public class Tester {
                 clients.get(2).buyTraTicket(trainTickets.get(1));
             }
         });
+		//线程开始
         t1.start();
         t2.start();
         t3.start();
-
+		//线程等待结束
         t1.join();
         t2.join();
         t3.join();
 
 
     }
-
+	//异常抛给JVM，Test通过static运行。
     public static void main(String[] args) throws InterruptedException {
         //Test_1();
         Test_2();

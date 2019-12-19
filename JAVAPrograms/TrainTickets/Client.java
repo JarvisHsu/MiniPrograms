@@ -28,6 +28,7 @@ public class Client {
         System.out.println("购买成功 "+"当前余票:"+trainTicket.getTraNum()+"张");
         System.out.println("购票信息:"+this.User+"的"+trainTicket.getTraSpecies()+"车票已经成功购买!祝您旅途愉快");
     }
+	
     //用户基本信息toString重写
     @Override
     public String toString() {
