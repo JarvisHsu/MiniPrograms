@@ -65,19 +65,19 @@ public class Tester {
 
     }
     //测试死锁
-    public static void Test_03() throws InterruptedException {
+    public static void Test_3() throws InterruptedException {
     	new Tester();
 	Thread t1 = new Thread(() -> {
 		synchronized(Lock.lock1){
 			synchronized(Lock.lock2){
-				client.get(0).bugTraTicket(trainTickets.get(0));
+				clients.get(0).buyTraTicket(trainTickets.get(0));
 			}
 		}
 	});
 	Thread t2 = new Thread(() -> {
 		synchronized(Lock.lock2){
 			synchronized(Lock.lock1){
-				client.get(1).bugTraTicket(trainTickets.get(0));
+				clients.get(1).buyTraTicket(trainTickets.get(0));
 			}
 		}
 	});
@@ -94,6 +94,7 @@ public class Tester {
     public static void main(String[] args) throws InterruptedException {
         //Test_1();
         Test_2();
+		//Test_3();
 
     }
 }
