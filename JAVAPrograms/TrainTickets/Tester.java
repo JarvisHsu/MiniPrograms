@@ -64,6 +64,32 @@ public class Tester {
 
 
     }
+    //测试死锁
+    public static void Test_03() throws InterruptedException {
+    	new Tester();
+	Thread t1 = new Thread(() -> {
+		synchronized(Lock.lock1){
+			synchronized(Lock.lock2){
+				client.get(0).bugTraTicket(trainTickets.get(0));
+			}
+		}
+	});
+	Thread t2 = new Thread(() -> {
+		synchronized(Lock.lock2){
+			synchronized(Lock.lock1){
+				client.get(1).bugTraTicket(trainTickets.get(0));
+			}
+		}
+	});
+
+	t1.start();
+	t2.start();
+
+	t1.join();
+	t2.join();
+
+	
+    }
 	//异常抛给JVM，Test通过static运行。
     public static void main(String[] args) throws InterruptedException {
         //Test_1();
