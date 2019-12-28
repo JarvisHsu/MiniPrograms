@@ -8,6 +8,7 @@ class Lock{
 }
 /**
  *@author JarvisHsu 徐佳伟
+ *警告！java版本低于1.80，请不要编译程序.
  */
 public class Tester {
     public static ArrayList<Client> clients = new ArrayList<>();
@@ -37,18 +38,19 @@ public class Tester {
 	//测试三个用户买两种票的线程运行机制。
     public static void Test_2() throws InterruptedException {
         new Tester();
-        Thread t1 = new Thread(() -> {
+        //lambda写法，仅支持java8以上的版本.
+        Thread t1 = new Thread(()->{
 			//加锁
             synchronized (Lock.lock1) {
                 clients.get(0).buyTraTicket(trainTickets.get(0));
             }
         });
-        Thread t2 = new Thread(() -> {
+        Thread t2 = new Thread(()->{
             synchronized (Lock.lock1) {
                 clients.get(1).buyTraTicket(trainTickets.get(0));
             }
         });
-        Thread t3 = new Thread(() -> {
+        Thread t3 = new Thread(()->{
             synchronized (Lock.lock2) {
                 clients.get(2).buyTraTicket(trainTickets.get(1));
             }
@@ -67,14 +69,14 @@ public class Tester {
     //测试死锁
     public static void Test_3() throws InterruptedException {
     	new Tester();
-	Thread t1 = new Thread(() -> {
+	Thread t1 = new Thread(()->{
 		synchronized(Lock.lock1){
 			synchronized(Lock.lock2){
 				clients.get(0).buyTraTicket(trainTickets.get(0));
 			}
 		}
 	});
-	Thread t2 = new Thread(() -> {
+	Thread t2 = new Thread(()->{
 		synchronized(Lock.lock2){
 			synchronized(Lock.lock1){
 				clients.get(1).buyTraTicket(trainTickets.get(0));
